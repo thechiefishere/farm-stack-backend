@@ -23,4 +23,4 @@ phases:
       - ls
       - echo Copying files to server...
       - scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -r backend/* ubuntu@34.205.43.1:app
-      - ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@34.205.43.1 "python3 -m venv app/venv && source app/venv/bin/activate && pip install --upgrade pip && pip install -r app/requirements.txt && python3 app/src/server.py"
+      - ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@34.205.43.1 "sudo apt-get update -y && sudo apt-get install -y python3-venv && python3 -m venv app/venv && source app/venv/bin/activate && pip install --upgrade pip && pip install -r app/requirements.txt && python3 app/src/server.py"
