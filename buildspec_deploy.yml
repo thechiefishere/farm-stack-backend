@@ -20,6 +20,6 @@ phases:
       - mkdir -p ~/.ssh
       - aws s3 cp s3://john-terraform-state-bucket-002/jbaba-key.pem ~/.ssh/id_rsa
       - chmod 600 ~/.ssh/id_rsa
-      - ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@34.205.43.1 "mkdir -p /app"
+      - ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@34.205.43.1 "mkdir -p app"
       - echo Copying files to server...
-      - scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -r backend/* ubuntu@34.205.43.1:/app "pip install --upgrade -r /app/requirements.txt && python3 /app/src/server.py"
+      - scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -r backend/* ubuntu@34.205.43.1:app "pip install --upgrade -r app/requirements.txt && python3 app/src/server.py"
