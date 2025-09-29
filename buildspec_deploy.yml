@@ -9,7 +9,7 @@ phases:
   pre_build:
     commands:
       - echo Pre-build started on `date`
-      - cd backend
+      # - cd backend
   build:
     commands:
       - echo Build started on `date`
@@ -22,5 +22,5 @@ phases:
       - chmod 600 ~/.ssh/id_rsa
       - ls
       - echo Copying files to server...
-      - scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -r . ubuntu@34.205.43.1:app
+      - scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -r backend/* ubuntu@34.205.43.1:app
       - ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@34.205.43.1 "pip install --upgrade -r app/requirements.txt && python3 app/src/server.py"
