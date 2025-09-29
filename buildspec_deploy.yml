@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+    commands:
+      - echo Installing dependencies...
+  pre_build:
+    commands:
+      - echo Pre-build started on `date`
+      - cd backend
+  build:
+    commands:
+      - echo Build started on `date`
+      - python --version
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - mkdir -p ~/.ssh
+      - aws s3 cp s3://john-terraform-state-bucket-002/jbaba-key.pem ~/.ssh/id_rsa
+      - chmod 600 ~/.ssh/id_rsa
+      - ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ubuntu@44.200.70.81 "mkdir -p /app"
+      - echo Copying files to server...
+      - scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no -r backend/* ubuntu@44.200.70.81:/app "pip install --upgrade -r /app/requirements.txt && python3 /app/src/server.py"
