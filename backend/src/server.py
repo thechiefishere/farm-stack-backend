@@ -12,7 +12,8 @@ import uvicorn
 from dal import ToDoDAL, ListSummary, ToDoList
 
 COLLECTION_NAME = "todo_lists"
-MONGODB_URI = os.environ["MONGODB_URI"]
+# MONGODB_URI = os.environ["MONGODB_URI"]
+MONGODB_URI = "mongodb://username:password@localhost:27017/dbname"
 DEBUG = os.environ.get("DEBUG", "").strip().lower() in {"1", "true", "on", "yes"}
 
 
