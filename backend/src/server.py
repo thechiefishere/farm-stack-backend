@@ -8,6 +8,7 @@ from fastapi import FastAPI, status
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel
 import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
 
 from dal import ToDoDAL, ListSummary, ToDoList
 
@@ -39,6 +40,18 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan, debug=DEBUG)
+
+origins = [
+    "http://44.201.37.122"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,           # or ["*"] to allow all (dev only)
+    allow_credentials=True,
+    allow_methods=["*"],             # GET, POST, DELETE, PATCH...
+    allow_headers=["*"],
+)
 
 
 @app.get("/api/lists")
