@@ -54,6 +54,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+async def main():
+    return {"message": "Hello World"}
+
 
 @app.get("/api/lists")
 async def get_all_lists() -> list[ListSummary]:
